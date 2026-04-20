@@ -91,7 +91,7 @@ export default function Home() {
 
         {activeTab === "dashboard" && (
           <>
-            <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               <div className="bg-neutral-800 rounded-lg p-4">
                 <p className="text-neutral-400 text-sm">Total Value</p>
                 <p className="text-2xl font-bold">{formatCurrency(summary.totalValue)}</p>
@@ -101,15 +101,31 @@ export default function Home() {
                 <p className="text-2xl font-bold">{formatCurrency(summary.totalInvested)}</p>
               </div>
               <div className="bg-neutral-800 rounded-lg p-4">
-                <p className="text-neutral-400 text-sm">Profit/Loss</p>
-                <p className={`text-2xl font-bold ${summary.totalProfitLoss >= 0 ? "text-green-400" : "text-red-400"}`}>
-                  {summary.totalProfitLoss >= 0 ? "+" : "-"}{formatCurrency(Math.abs(summary.totalProfitLoss))}
+                <p className="text-neutral-400 text-sm">Today&apos;s P/L</p>
+                <p className={`text-2xl font-bold ${summary.dayChange >= 0 ? "text-green-400" : "text-red-400"}`}>
+                  {summary.dayChange >= 0 ? "+" : "-"}{formatCurrency(Math.abs(summary.dayChange))}
+                </p>
+                <p className={`text-xs ${summary.dayChangePercent >= 0 ? "text-green-400" : "text-red-400"}`}>
+                  {summary.dayChangePercent >= 0 ? "+" : ""}{summary.dayChangePercent.toFixed(2)}%
                 </p>
               </div>
               <div className="bg-neutral-800 rounded-lg p-4">
-                <p className="text-neutral-400 text-sm">Return</p>
-                <p className={`text-2xl font-bold ${summary.totalProfitLossPercent >= 0 ? "text-green-400" : "text-red-400"}`}>
+                <p className="text-neutral-400 text-sm">Overall P/L</p>
+                <p className={`text-2xl font-bold ${summary.totalProfitLoss >= 0 ? "text-green-400" : "text-red-400"}`}>
+                  {summary.totalProfitLoss >= 0 ? "+" : "-"}{formatCurrency(Math.abs(summary.totalProfitLoss))}
+                </p>
+                <p className={`text-xs ${summary.totalProfitLossPercent >= 0 ? "text-green-400" : "text-red-400"}`}>
                   {summary.totalProfitLossPercent >= 0 ? "+" : ""}{summary.totalProfitLossPercent.toFixed(2)}%
+                </p>
+              </div>
+              <div className="bg-neutral-800 rounded-lg p-4">
+                <p className="text-neutral-400 text-sm">Holdings</p>
+                <p className="text-2xl font-bold">{summary.holdingsCount}</p>
+              </div>
+              <div className="bg-neutral-800 rounded-lg p-4">
+                <p className="text-neutral-400 text-sm">Day Change</p>
+                <p className={`text-2xl font-bold ${summary.dayChange >= 0 ? "text-green-400" : "text-red-400"}`}>
+                  {summary.dayChangePercent >= 0 ? "+" : ""}{summary.dayChangePercent.toFixed(2)}%
                 </p>
               </div>
             </section>
